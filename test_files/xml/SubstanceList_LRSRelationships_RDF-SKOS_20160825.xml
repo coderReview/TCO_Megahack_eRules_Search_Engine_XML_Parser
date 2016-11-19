@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+xmlns:zthes="http://synaptica.net/zthes/"
+xmlns:skm="http://synaptica.net/skm/">
+<skos:Concept rdf:about="#3606648"> <skm:termUpdate>add</skm:termUpdate><skos:prefLabel>CAA 112R</skos:prefLabel><zthes:termID>3606648</zthes:termID><zthes:termVocabulary>Substance Lists</zthes:termVocabulary>
+<skm:CSL rdf:resource="#3862628" rdf:ID="r3606648-3862628" />
+<zthes:termNote rdf:ID="ListAcronym-3606648">List Acronym</zthes:termNote>
+<zthes:termNote rdf:ID="ListName-3606648">List Name</zthes:termNote>
+<zthes:termNote rdf:ID="ListNo.-3606648">List No.</zthes:termNote>
+</skos:Concept><rdf:Description rdf:about="ListAcronym-3606648"><zthes:label>CAA 112R</zthes:label></rdf:Description>
+<rdf:Description rdf:about="ListName-3606648"><zthes:label>Toxic and Flammable Substances for Accidental Release Prevention</zthes:label></rdf:Description>
+<rdf:Description rdf:about="ListNo.-3606648"><zthes:label>166</zthes:label></rdf:Description>
+<rdf:Description rdf:about="r3606648-3862628"><zthes:weight>100</zthes:weight></rdf:Description>
+<skos:Concept rdf:about="#3606680"> <skm:termUpdate>add</skm:termUpdate><skos:prefLabel>EPCRA 302</skos:prefLabel><zthes:termID>3606680</zthes:termID><zthes:termVocabulary>Substance Lists</zthes:termVocabulary>
+<skm:CSL rdf:resource="#3878573" rdf:ID="r3606680-3878573" />
+<zthes:termNote rdf:ID="ListAcronym-3606680">List Acronym</zthes:termNote>
+<zthes:termNote rdf:ID="ListName-3606680">List Name</zthes:termNote>
+<zthes:termNote rdf:ID="ListNo.-3606680">List No.</zthes:termNote>
+</skos:Concept><rdf:Description rdf:about="ListAcronym-3606680"><zthes:label>EPCRA 302</zthes:label></rdf:Description>
+<rdf:Description rdf:about="ListName-3606680"><zthes:label>Extremely Hazardous Substance List</zthes:label></rdf:Description>
+<rdf:Description rdf:about="ListNo.-3606680"><zthes:label>135</zthes:label></rdf:Description>
+<rdf:Description rdf:about="r3606680-3878573"><zthes:weight>100</zthes:weight></rdf:Description>
+<skos:Concept rdf:about="#3606681"> <skm:termUpdate>add</skm:termUpdate><skos:prefLabel>EPCRA 313</skos:prefLabel><zthes:termID>3606681</zthes:termID><zthes:termVocabulary>Substance Lists</zthes:termVocabulary>
+<skm:CSL rdf:resource="#3878641" rdf:ID="r3606681-3878641" />
+<zthes:termNote rdf:ID="ListAcronym-3606681">List Acronym</zthes:termNote>
+<zthes:termNote rdf:ID="ListName-3606681">List Name</zthes:termNote>
+<zthes:termNote rdf:ID="ListNo.-3606681">List No.</zthes:termNote>
+</skos:Concept><rdf:Description rdf:about="ListAcronym-3606681"><zthes:label>EPCRA 313</zthes:label></rdf:Description>
+<rdf:Description rdf:about="ListName-3606681"><zthes:label>Emergency Planning and Community Right-to-Know Act Section 313</zthes:label></rdf:Description>
+<rdf:Description rdf:about="ListNo.-3606681"><zthes:label>107</zthes:label></rdf:Description>
+<rdf:Description rdf:about="r3606681-3878641"><zthes:weight>100</zthes:weight></rdf:Description>
+<skos:Concept rdf:about="#3862628"> <skm:termUpdate>reference</skm:termUpdate><skos:prefLabel>CFR-2015-title40-vol16-part68</skos:prefLabel><zthes:termID>3862628</zthes:termID><zthes:termVocabulary>CFR 2015 Title 40 Vol 16</zthes:termVocabulary></skos:Concept>
+<skos:Concept rdf:about="#3878573"> <skm:termUpdate>reference</skm:termUpdate><skos:prefLabel>CFR-2015-title40-vol28-part355</skos:prefLabel><zthes:termID>3878573</zthes:termID><zthes:termVocabulary>CFR 2015 Title 40 Vol 28</zthes:termVocabulary></skos:Concept>
+<skos:Concept rdf:about="#3878641"> <skm:termUpdate>reference</skm:termUpdate><skos:prefLabel>CFR-2015-title40-vol28-part372</skos:prefLabel><zthes:termID>3878641</zthes:termID><zthes:termVocabulary>CFR 2015 Title 40 Vol 28</zthes:termVocabulary></skos:Concept>
+</rdf:RDF>
