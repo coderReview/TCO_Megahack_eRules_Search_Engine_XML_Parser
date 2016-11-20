@@ -136,12 +136,26 @@ function* getRegulationById(id) {
   return yield models.Regulation.findById(id);
 }
 
+/**
+ * Get regulation by CFR parts or returns null if not found
+ * @param {Number} cfrParts the cfr parts
+ * @returns {Object} the result
+ */
+function* getRegulationByCFR(cfrParts) {
+  Joi.assert(
+    { cfrParts },
+    { cfrParts: Joi.array().items(Joi.number().required()) });
+  return yield models.Regulation.find({ cfr: { $in: cfrParts } });
+}
+
+
 module.exports = {
   init,
   searchNaicsCodes,
   getNaicsByCode,
   searchPrograms,
   getRegulationById,
+  getRegulationByCFR,
   getNaicsById,
   getNaicsByCFR,
   getProgramById,
