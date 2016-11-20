@@ -7,6 +7,7 @@ const Joi = require('joi');
 const config = require('../config');
 const models = require('./models');
 const helper = require('./helper');
+const loadRegulations = require('./load-regulations');
 const loadNaics = require('./load-naics');
 const loadPrograms = require('./load-programs');
 
@@ -28,6 +29,7 @@ function* init(opts, load) {
   if (!load) {
     return;
   }
+  yield loadRegulations();
   yield loadNaics();
   yield loadPrograms();
 }
@@ -79,6 +81,22 @@ function *getNaicsById(id) {
 }
 
 /**
+ * Get naics by cfr parts
+ * @param {Number} cfrParts the cfr parts
+ * @returns {Object} the result
+ */
+function *getNaicsByCFR(cfrParts) {
+  Joi.assert(
+    { cfrParts },
+    { cfrParts: Joi.array().items(Joi.number().required()) });
+  let results = yield models.NaicsCode.find().populate({
+      path: 'regulations',
+      match: { cfr: { $in: cfrParts } }
+  }).exec();
+  return _.filter(results, naics => naics.regulations.length > 0);
+}
+
+/**
  * Get program by id
  * @param {Number} id the id
  * @returns {Object} the result
@@ -88,6 +106,22 @@ function *getProgramById(id) {
     { id },
     { id: Joi.number().integer().required() });
   return yield models.Program.findById(id);
+}
+
+/**
+ * Get program by cfr part
+ * @param {Number} cfrPart the cfr part
+ * @returns {Object} the result
+ */
+function *getProgramByCFR(cfrParts) {
+  Joi.assert(
+    { cfrParts },
+    { cfrParts: Joi.array().items(Joi.number().required()) });
+  let results = yield models.Program.find().populate({
+      path: 'regulations',
+      match: { cfr: { $in: cfrParts } }
+  }).exec();
+  return _.filter(results, programs => programs.regulations.length > 0);
 }
 
 /**
@@ -109,5 +143,7 @@ module.exports = {
   searchPrograms,
   getRegulationById,
   getNaicsById,
+  getNaicsByCFR,
   getProgramById,
+  getProgramByCFR
 };

@@ -8,9 +8,6 @@ const config = require('../config');
 const models = require('./models');
 const helper = require('./helper');
 
-const minCAA = 50;
-const maxCAA = 98;
-
 /**
  * Load programs
  */
@@ -23,19 +20,16 @@ function* loadPrograms() {
     return {
       _id: termId,
       name: label,
-      regulations: [],
+      regulations: []
     };
   });
   const map = _.keyBy(mappedPrograms, '_id');
-  const regulationMap = {};
 
   const regulations = yield helper.loadRegulations();
+
   _.forEach(regulations, (item) => {
     // find references between programs and regulations
     _.forEach(item.concepts, (concept) => {
-      const termId = _.get(concept, 'zthes:termID[0]');
-      regulationMap[termId] = { _id: termId };
-
       if (concept['skm:PC']) {
         let programId = _.get(concept, 'skm:PC[0].$.rdf:resource');
         let ref = _.get(concept, 'skm:PC[0].$.rdf:ID');
@@ -50,44 +44,14 @@ function* loadPrograms() {
         }
       }
     });
-
-    // parse regulations
-    _.forEach(item.descriptions, (desc) => {
-      const about = _.get(desc, '$.rdf:about');
-      const label = _.get(desc, 'zthes:label[0]');
-      if (!about || !label) {
-        return;
-      }
-      const split = about.split('-');
-      const id = split[1];
-      if (!regulationMap[id]) {
-        return;
-      }
-      if (split[0] === 'Title') {
-        regulationMap[id].title = label;
-      } else if (split[0] === 'URL') {
-        regulationMap[id].url = label;
-      } else if (split[0] === 'Heading') {
-        const exec = /Part (\d+)/.exec(label);
-        if (exec) {
-          const part = exec[1];
-          regulationMap[id].isCAA = part >= minCAA && part <= maxCAA;
-        }
-      }
-    });
   });
 
-  // remove incomplete regulations
-  _.forEach(regulationMap, (value, id) => {
-    if (!value.title) {
-      delete regulationMap[id];
-    }
-  });
+  var regulationMap = yield models.Regulation.find();
 
   // check if references exists
   _.forEach(mappedPrograms, (program) => {
     program.regulations = _(program.regulations)
-      .map((id) => regulationMap[id])
+      .map((id) => regulationMap.find(obj => obj.id === id))
       .compact()
       .map('_id')
       .value();
@@ -95,9 +59,6 @@ function* loadPrograms() {
 
   yield models.Program.remove({});
   yield models.Program.create(mappedPrograms);
-
-  yield models.Regulation.remove({});
-  yield models.Regulation.create(_.values(regulationMap));
 }
 
 module.exports = loadPrograms;

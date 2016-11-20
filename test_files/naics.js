@@ -16,4 +16,6 @@ helper.run(function* run() {
   helper.log(yield parser.getNaicsByCode('812990'));
   console.log('Get by id 2944876');
   helper.log(yield parser.getNaicsById(2944876));
+  console.log('Get by cfr 372');
+  helper.log(yield parser.getNaicsByCFR([372]));
 });

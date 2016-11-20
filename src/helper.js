@@ -10,6 +10,8 @@ const glob = require('glob');
 const parseString = require('xml2js').parseString;
 const config = require('../config');
 
+let regulations;
+
 /**
  * Parse SKOS xml file
  * @param {String} xmlPath the absolute path
@@ -54,9 +56,12 @@ function parsePrefLabel(item) {
  * @returns {Array} the array of parsed xml files
  */
 function* loadRegulations() {
-  const pattern = path.join(config.baseDir, config.regulationsFilePattern);
-  const files = yield (cb) => glob(pattern, cb);
-  return yield _.map(files, parseSkosXML);
+  if (!regulations) {
+    const pattern = path.join(config.baseDir, config.regulationsFilePattern);
+    const files = yield (cb) => glob(pattern, cb);
+    regulations = yield _.map(files, parseSkosXML);
+  }
+  return regulations;
 }
 
 /**
