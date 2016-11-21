@@ -51,12 +51,10 @@ function* loadNaics() {
     _.forEach(item.concepts, (concept) => {
       let nc = concept['skm:NC'];
       if (nc) {
-        console.log('NCs: ' + nc.length);
         for (var index = 0; index < nc.length; index++) {
           let naicsId = _.get(concept, 'skm:NC['+index+'].$.rdf:resource');
           let ref = _.get(concept, 'skm:NC['+index+'].$.rdf:ID');
           if (naicsId && ref) {
-            console.log('Found NAICS :' + naicsId);
             console.log('Ref:' + ref);
             // example #3796070
             naicsId = naicsId.replace('#', '');
@@ -64,7 +62,6 @@ function* loadNaics() {
             ref = ref.split('-')[0].replace('r', '');
             if (map[naicsId]) {
               map[naicsId].regulations.push(ref);
-              console.log('Added regulation with ref: ' + ref);
             }
           }
         }

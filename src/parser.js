@@ -42,7 +42,7 @@ function* init(opts, load) {
  * @returns {{items: Array, total: Number}} the result
  */
 function* searchNaicsCodes(searchTerm, offset, limit) {
-  return yield helper.fullTextSearch(models.NaicsCode, searchTerm, offset, limit);
+  return yield helper.fullTextSearch(models.NaicsCode, searchTerm, offset, limit, 'regulations');
 }
 
 /**
@@ -93,6 +93,7 @@ function *getNaicsByCFR(cfrParts) {
       path: 'regulations',
       match: { cfr: { $in: cfrParts } }
   }).exec();
+
   return _.filter(results, naics => naics.regulations.length > 0);
 }
 
